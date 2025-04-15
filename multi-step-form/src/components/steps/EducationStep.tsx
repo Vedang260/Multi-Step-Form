@@ -7,7 +7,7 @@ import { TextInput } from '../common/TextInput'
 import { motion } from 'framer-motion'
 
 export const EducationStep: React.FC = () => {
-  const { personalInfo, educations, addEducation, nextStep, prevStep } = useFormStore()
+  const { educations, addEducation, nextStep, prevStep } = useFormStore()
   const [formData, setFormData] = useState({
     school: '',
     degree: '',

@@ -41,7 +41,7 @@ export const SubmitStep: React.FC = () => {
       })
     }
 
-    if (personalInfo.educationLevel === 'Graduate or higher' && educations.length === 0) {
+    if (educations.length === 0) {
       validationErrors.push('At least one education entry is required')
     } else {
       educations.forEach((edu, index) => {
