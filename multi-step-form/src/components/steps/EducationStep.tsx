@@ -21,7 +21,7 @@ export const EducationStep: React.FC = () => {
 
   const handleAdd = () => {
     try {
-      if(formData.startYear > formData.endYear){
+      if(formData.startYear < formData.endYear){
         setErrors({ startYear: 'It must be appropriate'})
       }
       const validatedData = educationSchema.parse(formData)
@@ -126,7 +126,7 @@ export const EducationStep: React.FC = () => {
       <div className="flex justify-between">
         <Button onClick={prevStep}>Previous</Button>
         <Button onClick={handleSubmit}>
-          {educations.length > 0 ? 'Next' : 'Skip Education'}
+          {educations.length > 0 ? 'Next' : 'Next'}
         </Button>
       </div>
     </motion.div>

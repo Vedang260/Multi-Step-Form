@@ -44,6 +44,7 @@ export const PersonalInfoStep: React.FC = () => {
         <TextInput
           label="Full Name"
           value={personalInfo.fullName}
+          placeholder='John Doe'
           onChange={(e: any) => handleChange('fullName', e.target.value)}
           error={errors.fullName}
         />
@@ -51,12 +52,14 @@ export const PersonalInfoStep: React.FC = () => {
           label="Email"
           type="email"
           value={personalInfo.email}
+          placeholder='john@gmail.com'
           onChange={(e) => handleChange('email', e.target.value)}
           error={errors.email}
         />
         <TextInput
           label="Phone Number"
           value={personalInfo.phone}
+          placeholder='+919820202034'
           onChange={(e) => handleChange('phone', e.target.value)}
           error={errors.phone}
         />

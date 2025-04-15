@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import { PersonalInfo, Experience, Education, Skill, Reference } from '../types/form'
 
 interface FormState {
@@ -26,52 +27,59 @@ interface FormState {
   goToStep: (step: number) => void
 }
 
-export const useFormStore = create<FormState>((set) => ({
-  step: 1,
-  personalInfo: {
-    fullName: '',
-    email: '',
-    phone: '',
-    gender: 'Prefer not to say',
-    location: '',
-    educationLevel: 'High School',
-  },
-  experiences: [],
-  educations: [],
-  skills: [],
-  references: [],
-  skipReferences: false,
-  setPersonalInfo: (data) => set({ personalInfo: data }),
-  addExperience: (data) => set((state) => ({ experiences: [...state.experiences, data] })),
-  updateExperience: (index, data) =>
-    set((state) => ({
-      experiences: state.experiences.map((exp, i) => (i === index ? data : exp)),
-    })),
-  removeExperience: (index) =>
-    set((state) => ({
-      experiences: state.experiences.filter((_, i) => i !== index),
-    })),
-  addEducation: (data) => set((state) => ({ educations: [...state.educations, data] })),
-  updateEducation: (index, data) =>
-    set((state) => ({
-      educations: state.educations.map((edu, i) => (i === index ? data : edu)),
-    })),
-  removeEducation: (index) =>
-    set((state) => ({
-      educations: state.educations.filter((_, i) => i !== index),
-    })),
-  setSkills: (skills) => set({ skills }),
-  addReference: (data) => set((state) => ({ references: [...state.references, data] })),
-  updateReference: (index, data) =>
-    set((state) => ({
-      references: state.references.map((ref, i) => (i === index ? data : ref)),
-    })),
-  removeReference: (index) =>
-    set((state) => ({
-      references: state.references.filter((_, i) => i !== index),
-    })),
-  setSkipReferences: (skip) => set({ skipReferences: skip }),
-  nextStep: () => set((state) => ({ step: state.step + 1 })),
-  prevStep: () => set((state) => ({ step: state.step - 1 })),
-  goToStep: (step) => set({ step }),
-}))
+export const useFormStore = create<FormState>()(
+  persist(
+    (set) => ({
+      step: 1,
+      personalInfo: {
+        fullName: '',
+        email: '',
+        phone: '',
+        gender: 'Prefer not to say',
+        location: '',
+        educationLevel: 'High School',
+      },
+      experiences: [],
+      educations: [],
+      skills: [],
+      references: [],
+      skipReferences: false,
+      setPersonalInfo: (data) => set({ personalInfo: data }),
+      addExperience: (data) => set((state) => ({ experiences: [...state.experiences, data] })),
+      updateExperience: (index, data) =>
+        set((state) => ({
+          experiences: state.experiences.map((exp, i) => (i === index ? data : exp)),
+        })),
+      removeExperience: (index) =>
+        set((state) => ({
+          experiences: state.experiences.filter((_, i) => i !== index),
+        })),
+      addEducation: (data) => set((state) => ({ educations: [...state.educations, data] })),
+      updateEducation: (index, data) =>
+        set((state) => ({
+          educations: state.educations.map((edu, i) => (i === index ? data : edu)),
+        })),
+      removeEducation: (index) =>
+        set((state) => ({
+          educations: state.educations.filter((_, i) => i !== index),
+        })),
+      setSkills: (skills) => set({ skills }),
+      addReference: (data) => set((state) => ({ references: [...state.references, data] })),
+      updateReference: (index, data) =>
+        set((state) => ({
+          references: state.references.map((ref, i) => (i === index ? data : ref)),
+        })),
+      removeReference: (index) =>
+        set((state) => ({
+          references: state.references.filter((_, i) => i !== index),
+        })),
+      setSkipReferences: (skip) => set({ skipReferences: skip }),
+      nextStep: () => set((state) => ({ step: state.step + 1 })),
+      prevStep: () => set((state) => ({ step: state.step - 1 })),
+      goToStep: (step) => set({ step }),
+    }),
+    {
+      name: 'form-storage', // Key in localStorage
+    }
+  )
+)
