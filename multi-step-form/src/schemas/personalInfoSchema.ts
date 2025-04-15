@@ -12,7 +12,7 @@ export const personalInfoSchema = z.object({
     phone: z
         .string()
         .min(1, 'Phone number is required')
-        .regex(/^\+?[1-9]\d{1, 14}$/, 'Invalid phone number'),
+        .regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number'),
     dob: z
         .string()
         .optional(),

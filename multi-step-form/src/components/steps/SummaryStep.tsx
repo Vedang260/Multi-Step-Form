@@ -1,4 +1,4 @@
-import { useFormStore } from '../../state/formState'
+import { useFormStore } from '../../state/formStore'
 import { calculateAge } from '../../utils/calculateAge'
 import { Button } from '../common/Button'
 import { motion } from 'framer-motion'

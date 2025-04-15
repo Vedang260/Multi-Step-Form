@@ -1,4 +1,4 @@
-import { useFormStore } from '../../state/formState'
+import { useFormStore } from '../../state/formStore'
 import { Button } from '../common/Button'
 import { ChipInput } from '../ui/ChipInput'
 import { motion } from 'framer-motion'

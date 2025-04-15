@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useFormStore } from '../../state/formState'
+import { useFormStore } from '../../state/formStore'
 import { personalInfoSchema } from '../../schemas/personalInfoSchema'
 import { experienceSchema } from '../../schemas/experienceSchema'
 import { educationSchema } from '../../schemas/educationSchema'

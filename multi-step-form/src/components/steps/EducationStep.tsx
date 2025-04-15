@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { z } from 'zod'
-import { useFormStore } from '../../state/formState'
+import { useFormStore } from '../../state/formStore'
 import { educationSchema } from '../../schemas/educationSchema'
 import { Button } from '../common/Button'
 import { TextInput } from '../common/TextInput'
@@ -19,13 +19,11 @@ export const EducationStep: React.FC = () => {
   })
   const [errors, setErrors] = useState<Partial<z.infer<typeof educationSchema>>>({})
 
-  if (personalInfo.educationLevel !== 'Graduate or higher') {
-    nextStep()
-    return null
-  }
-
   const handleAdd = () => {
     try {
+      if(formData.startYear > formData.endYear){
+        setErrors({ startYear: 'It must be appropriate'})
+      }
       const validatedData = educationSchema.parse(formData)
       addEducation(validatedData)
       setErrors({})
@@ -124,11 +122,12 @@ export const EducationStep: React.FC = () => {
           ))}
         </div>
       )}
+      
       <div className="flex justify-between">
-        <Button onClick={prevStep} variant="secondary">
-          Previous
+        <Button onClick={prevStep}>Previous</Button>
+        <Button onClick={handleSubmit}>
+          {educations.length > 0 ? 'Next' : 'Skip Education'}
         </Button>
-        <Button onClick={handleSubmit}>Next</Button>
       </div>
     </motion.div>
   )

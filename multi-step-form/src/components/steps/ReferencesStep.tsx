@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { z } from 'zod'
-import { useFormStore } from '../../state/formState'
+import { useFormStore } from '../../state/formStore'
 import { referenceSchema } from '../../schemas/referenceSchema'
 import { Button } from '../common/Button'
 import { TextInput } from '../common/TextInput'

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { z } from 'zod'
-import { useFormStore } from '../../state/formState'
+import { useFormStore } from '../../state/formStore'
 import { personalInfoSchema } from '../../schemas/personalInfoSchema'
 import { Button } from '../common/Button'
 import { Select } from '../common/Select'

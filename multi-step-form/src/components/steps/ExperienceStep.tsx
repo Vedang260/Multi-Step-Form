@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { z } from 'zod'
-import { useFormStore } from '../../state/formState'
+import { useFormStore } from '../../state/formStore'
 import { experienceSchema } from '../../schemas/experienceSchema'
 import { hasOverlappingDates } from '../../utils/validateDates'
 import { motion } from 'framer-motion'
