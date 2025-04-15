@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 
 export const EducationStep: React.FC = () => {
   const { educations, addEducation, nextStep, prevStep } = useFormStore()
+  const years = Array.from({ length: 80 }, (_, i) => `${new Date().getFullYear() - i}`)
   const [formData, setFormData] = useState({
     school: '',
     degree: '',
@@ -21,9 +22,10 @@ export const EducationStep: React.FC = () => {
 
   const handleAdd = () => {
     try {
-      if(formData.startYear < formData.endYear){
-        setErrors({ startYear: 'It must be appropriate'})
-      }
+      if (Number(formData.startYear) > Number(formData.endYear)) {
+        setErrors({ startYear: 'Start year cannot be after end year' })
+        return
+      }      
       const validatedData = educationSchema.parse(formData)
       addEducation(validatedData)
       setErrors({})
@@ -82,20 +84,37 @@ export const EducationStep: React.FC = () => {
           onChange={(e) => setFormData({ ...formData, field: e.target.value })}
           error={errors.field}
         />
-        <TextInput
-          label="Start Year"
-          type="number"
-          value={formData.startYear}
-          onChange={(e) => setFormData({ ...formData, startYear: e.target.value })}
-          error={errors.startYear}
-        />
-        <TextInput
+        <select
+            className="input-style"
+            value={formData.startYear}
+            aria-label='Start-Year'
+            onChange={(e) => setFormData({ ...formData, startYear: e.target.value })}
+          >
+            <option value="">Select Start Year</option>
+            {years.map((year) => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
+          {errors.startYear && <p className="text-red-500 text-sm">{errors.startYear}</p>}
+        <select
+              className="input-style"
+              value={formData.endYear}
+              aria-label='End-Year'
+              onChange={(e) => setFormData({ ...formData, endYear: e.target.value })}
+            >
+              <option value="">Select End Year</option>
+              {years.map((year) => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
+            {errors.endYear && <p className="text-red-500 text-sm">{errors.endYear}</p>}
+        {/* <TextInput
           label="End Year"
           type="number"
           value={formData.endYear}
           onChange={(e) => setFormData({ ...formData, endYear: e.target.value })}
           error={errors.endYear}
-        />
+        /> */}
         <TextInput
           label="Grade/GPA"
           value={formData.grade}
