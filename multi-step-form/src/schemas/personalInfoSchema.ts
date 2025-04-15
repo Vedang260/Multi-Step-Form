@@ -13,6 +13,11 @@ export const personalInfoSchema = z.object({
         .string()
         .min(1, 'Phone number is required')
         .regex(/^\+?[1-9]\d{1, 14}$/, 'Invalid phone number'),
+    dob: z
+        .string()
+        .optional(),
+    gender: z
+        .enum(['Male', 'Female', 'Other', 'Prefer not to say']),
     location: z
         .string()
         .min(1, 'Location is required'),
